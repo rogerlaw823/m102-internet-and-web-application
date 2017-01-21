@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      var lucky = new Array(7);
+      var luckySorted = new Array(7);
+      function draw(no)
+      {
+        // 1. activate and deactivate button
+        buttonHandling(no);
+        // 2. drawing number
+        drawn = drawingNumber(lucky, no);
+        lucky[no-1] = drawn;
+        // 3. sorting the numbers in the array
+        if (no != 7)
+          luckySorted = sortArray(lucky);
+          // 4. output
+          item = "drawNumber[" + no + "]";
+          document.getElementById(item).innerHTML = drawn;
+          result = display(luckySorted, no);
+          document.getElementById("outcome").innerHTML = result;
+      }
+          if (i == num)
+          {
+          document.getElementById(buttonName).disabled = false;
+          }
+          else
+          {
+          document.getElementById(buttonName).disabled = true;
+          }
+      function drawingNumber(arr, n)
+      {
+        var accept = false;
+        var number;
+        do
+        {
+          number = generate1to49();
+          accept = checkDuplicate(arr, n-1, number);
+        }
+        while (accept == false)
+          return number;
+      }
+
+      function buttonHandling(num)
+      {
+        for (int i=1; i<7; i++)
+        {
+          buttonName = "button[" + i + "]";
+
+          if (i == num)
+          {
+          document.getElementById(buttonName).disabled = false;
+          }
+          else
+          {
+          document.getElementById(buttonName).disabled = true;
+          }
+        }
+      }
+
+      function displays(arr,no)
+      {
+        var result = ""
+        for (i=1; i<=no; i++)
+        {
+          result + = arr[i];
+          result + = " ";
+        }
+        return result;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Mark Six Lottery Drawing</h1>
+    <p>
+      <table border="1">
+        <tr>
+          <th>1st Number</th>
+          <th>2nd Number</th>
+          <th>3rd Number</th>
+          <th>4th Number</th>
+          <th>5th Number</th>
+          <th>6th Number</th>
+          <th>Special Number</th>
+        </tr>
+
+        <tr>
+          <th id="drawNumber[1]">&nbsp;</th>
+          <th id="drawNumber[2]">&nbsp;</th>
+          <th id="drawNumber[3]">&nbsp;</th>
+          <th id="drawNumber[4]">&nbsp;</th>
+          <th id="drawNumber[5]">&nbsp;</th>
+          <th id="drawNumber[6]">&nbsp;</th>
+          <th id="drawNumber[7]">&nbsp;</th>
+        </tr>
+
+        <tr>
+          <th>
+            <button type="button" name="button[1]" id="button[1]" onclick="draw(1)">
+              1st</button>
+          </th>
+          <th>
+            <button type="button" name="button[2]" id="button[2]" onclick="draw(2)" disabled>
+              2nd</button>
+          </th>
+          <th>
+            <button type="button" name="button[3]" id="button[3]" onclick="draw(3)" disabled>
+              3rd</button>
+          </th>
+          <th>
+            <button type="button" name="button[4]" id="button[4]" onclick="draw(4)" disabled>
+              4th</button>
+          </th>
+          <th>
+            <button type="button" name="button[5]" id="button[5]" onclick="draw(5)" disabled>
+              5th</button>
+          </th>
+          <th>
+            <button type="button" name="button[6]" id="button[6]" onclick="draw(6)" disabled>
+              6th</button>
+          </th>
+          <th>
+            <button type="button" name="button[7]" id="button[7]" onclick="draw(7)" disabled>
+              Special</button>
+          </th>
+        </tr>
+
+        <tr>
+          <td colspan="7">
+            Drawing Result : <br />
+            <span id="outcome"></span>
+          </td>
+        </tr>
+      </table>
+    </p>
+</body>
+
+<!-- Hosting24 Analytics Code -->
+<script type="text/javascript" src="http://stats.hosting24.com/count.php"></script>
+<!-- End Of Analytics Code -->
