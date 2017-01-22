@@ -4,6 +4,76 @@
     <script>
       var lucky = new Array(7);
       var luckySorted = new Array(7);
+
+      function compareNumbers(a, b)
+      {
+        return a - b;
+      }
+
+      function sortArray(arr) {
+        newArr = new Array();
+
+        newArr = arr.sort(compareNumbers);
+
+        return newArr;
+      }
+
+      function generate1to49() {
+        num = Math.floor(Math.random()*49)+1;
+        return num;
+      }
+
+      function checkDuplicate(arr, maxIndex, value)
+      {
+        for (var i=0; i<maxIndex; i++)
+        {
+          if (arr[i] == value) return false;
+        }
+        return true;
+      }
+
+      function drawingNumber(arr, n)
+      {
+        var accept = false;
+        var number;
+        do
+        {
+          number = generate1to49();
+          accept = checkDuplicate(arr, n-1, number);
+        } while (accept == false)
+
+        return number;
+      }
+
+      function buttonHandling(num)
+      {
+        for (var i=1; i<=num; i++)
+        {
+          item = "button["+i+"]";
+
+          document.getElementById(item).disabled = true;
+        }
+        if (num != 7)
+        {
+          item = "button["+(num+1)+"]";
+          document.getElementById(item).disabled = false;
+        }
+      }
+
+      function displays(arr,no)
+      {
+        var result = ""
+        for (var i=0; i<no; i++)
+        {
+          if (i == 6)
+          {
+            result += "<br />Special Number :";
+          }
+          result += arr[i] + " ";
+        }
+        return result;
+      }
+
       function draw(no)
       {
         // 1. activate and deactivate button
@@ -17,57 +87,10 @@
           // 4. output
           item = "drawNumber[" + no + "]";
           document.getElementById(item).innerHTML = drawn;
-          result = display(luckySorted, no);
+          result = displays(luckySorted, no);
           document.getElementById("outcome").innerHTML = result;
       }
-          if (i == num)
-          {
-          document.getElementById(buttonName).disabled = false;
-          }
-          else
-          {
-          document.getElementById(buttonName).disabled = true;
-          }
-      function drawingNumber(arr, n)
-      {
-        var accept = false;
-        var number;
-        do
-        {
-          number = generate1to49();
-          accept = checkDuplicate(arr, n-1, number);
-        }
-        while (accept == false)
-          return number;
-      }
 
-      function buttonHandling(num)
-      {
-        for (int i=1; i<7; i++)
-        {
-          buttonName = "button[" + i + "]";
-
-          if (i == num)
-          {
-          document.getElementById(buttonName).disabled = false;
-          }
-          else
-          {
-          document.getElementById(buttonName).disabled = true;
-          }
-        }
-      }
-
-      function displays(arr,no)
-      {
-        var result = ""
-        for (i=1; i<=no; i++)
-        {
-          result + = arr[i];
-          result + = " ";
-        }
-        return result;
-      }
     </script>
   </head>
   <body>
