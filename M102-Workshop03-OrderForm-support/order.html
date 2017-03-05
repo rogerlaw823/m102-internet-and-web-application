@@ -1,0 +1,516 @@
+<html>
+  <head>
+    <title>GPS-ware Order Form</title>
+    <style>
+      body                { background-image    : url(border.jpg); 
+                            background-position : left; 
+                            background-repeat   : repeat-y; 
+                            margin-top          : 0; 
+                            padding-top         : 0
+                          }
+      #logo               { border-bottom-style : solid; 
+                            border-bottom-width : 2px; 
+                            border-bottom-color : rgb(223,125,76)
+                          }
+      #links              { color               : green; 
+                            font-family         : Arial, Helvetica, sans-serif; 
+                            font-size           : 8pt
+                          }
+      #links a            { color               : black; 
+                            text-decoration     : none
+                          }
+      #links a:hover      { color               : black; 
+                            text-decoration     : underline
+                          }
+      td                  { font-size           : 8pt; 
+                            font-family         : Arial, Helvetica, sans-serif
+                          }
+      .numbers            { text-align          : right; 
+                            background-color    : lightyellow
+                          }
+      .fmlabel            { color               : brown
+                          }
+    </style>
+
+    <script>
+      function dollars(n) 
+      {
+        n=eval(n);
+        n=Math.round(n*100)/100;
+        return (n == Math.round(n)) ? n += ".00" : (n*10 == Math.round(n*10)) ? n +="0" : n;
+      }
+
+      function todaytxt() 
+      {
+        var Today=new Date();
+        return Today.getDate()+"/"+(Today.getMonth()+1)+"/"+Today.getFullYear();
+        document.order.product.focus();
+      }
+
+      function startform()
+      {
+        document.order.formdate.value = todaytxt();
+      }
+
+      function total_price()
+      {
+        s1 = eval(document.order.sub1.value);
+        s2 = eval(document.order.sub2.value);
+        s3 = eval(document.order.sub3.value);
+        document.order.total.value = dollars(s1+s2+s3);
+      }
+
+      function order_price()
+      {
+        item_index  = document.order.product.selectedIndex;
+        item_value  = document.order.product.options[item_index].value;
+        qty_ordered = document.order.qty.selectedIndex;
+
+        document.order.sub1.value = dollars(item_value*qty_ordered);
+        document.order.sub2.value = dollars(item_value*qty_ordered*0.05);
+        total_price();
+      }
+
+      function shipping_price(field)
+      {
+        document.order.sub3.value = dollars(field.value);
+        total_price();
+      }
+
+      function copy_shipping()
+      {
+        if (document.order.billcb.checked)
+        {
+          document.order.bname.value=document.order.sname.value;
+          document.order.bstreet.value=document.order.sstreet.value;
+          document.order.bcity.value=document.order.scity.value;
+          document.order.bstate.selectedIndex=document.order.sstate.selectedIndex;
+          document.order.bzip.value=document.order.szip.value;
+        }
+      }
+
+      function use_credit()
+      {
+        if (document.order.creditcb.checked)
+        {
+          document.order.cname.focus();
+        }
+      }
+
+      function checkform()
+      {
+        product_ok = true;
+        if (document.order.sub1.value == "0.00") product_ok = false;
+        if (document.order.sub2.value == "0.00") product_ok = false;
+        if (document.order.sub3.value == "0.00") product_ok = false;
+      
+        shipping_ok =true;
+        if (document.order.sname.value == "")   shipping_ok = false;
+        if (document.order.sstreet.value == "") shipping_ok = false;
+        if (document.order.scity.value == "")   shipping_ok = false;
+        if (document.order.szip.value == "")    shipping_ok = false;
+      
+        billing_ok = true;
+        if (document.order.bname.value == "")   billing_ok = false;
+        if (document.order.bstreet.value == "") billing_ok = false;
+        if (document.order.bcity.value == "")   billing_ok = false;
+        if (document.order.bzip.value == "")    billing_ok = false;
+
+        credit_ok = true;
+        if (document.order.cname.value == "")   credit_ok  = false;
+        if (document.order.cnumber.value== "")  credit_ok  = false;
+
+        cardchecked = false;
+        for (i=0; i<=5; i++)
+        {
+          if (document.order.ccard[i].checked) cardchecked = true;
+        }
+        if (cardchecked == false)               credit_ok  = false;
+
+        payment_ok = (credit_ok || billing_ok);
+
+        form_ok    = (product_ok && shipping_ok && payment_ok);
+
+        if (form_ok == true)
+        {
+          alert("Your order has been submitted");
+        }
+        else
+        {
+          if (product_ok == false)
+            alert("Select a product quantity, and shipping method");
+          if (shipping_ok == false)
+          alert("Enter a shipping address");
+          if (payment_ok == false)
+          alert("Enter a billing address or credit card");
+        }
+        
+        return form_ok;
+      }
+
+    </script>
+  </head>
+
+  <body onload="startform()">
+    <table width="620" cellpadding="0" cellspacing="5">
+      <!-- START OF ORDER FORM -->
+      <form name="order" method="post" onsubmit="return checkform();" onreset="location.reload()">
+      <tr>
+         <!-- LIST OF LINKS -->
+         <td id="links" valign="top" width="100" rowspan="7">
+             <h2>Links</h2>
+             <a href="#">Home Page</a><br>
+             <a href="#">Product Catalog</a><br>
+             <a href="#">Order Form</a><br>
+             <a href="#">Maps Online</a><br>
+             <a href="#">Contact Us</a><br><br> 
+             <a href="#">Countries</a><br>
+             <a href="#">States</a><br>
+             <a href="#">National Parks</a><br>
+             <a href="#">Hiking Trails</a><br>
+             <a href="#">Cities</a><br>
+             <a href="#">Astronomical</a><br>
+             <a href="#">Natural</a><br><br>
+             <a href="#">GoMap 1.0</a><br>
+             <a href="#">Drive Planner 2.0<br> 
+             <a href="#">Hiker 1.0</a><br>
+             <a href="#">G-Receiver I</a><br>
+             <a href="#">G-Receiver II</a><br>
+             <a href="#">G-Receiver III</a><br><br>
+             <a href="#">Downloads</a><br>
+             <a href="#">Tech Support</a><br>
+             <a href="#">FAQs</a>
+         </td>
+
+         <!-- GPS-WARE COMPANY LOGO -->
+         <td id="logo" valign="top" width="520" colspan="2">
+             <img src="gpsware.jpg" alt="GPS-ware">
+         </td>
+      </tr>
+
+
+      <tr>
+         <td>
+             <h1 style="margin-bottom:0px">Order Form</h1>
+         </td>
+
+         <!-- FORM DATE -->
+         <td align="right">
+             <span class="fmlabel">Date:</span> 
+             <input class="numbers" name="formdate" size="10" disabled>
+         </td>
+      </tr>
+
+      <tr>
+         <!-- PRODUCT FIELDS -->
+         <td valign="top" colspan="2">
+             <fieldset>
+                <legend>Select a Product</legend>
+                <table>
+                  <tr>
+                     <!-- LIST OF GPS-WARE PRODUCTS -->
+                     <td width="70" valign="top">
+                         <span class="fmlabel">Product:</span></td>
+                     <td width="350" valign="top">
+                         <select name="product" onchange="order_price()">
+                             <option value="0">Products from GPS-ware
+                             <option value="19.95">GoMap 1.0 ($19.95)
+                             <option value="29.95">Drive Planner 2.0 ($29.95)
+                             <option value="29.95">Hiker 1.0 ($29.95)
+                             <option value="149.50">G-Receiver I ($149.50)
+                             <option value="199.50">G-Receiver II ($199.50)
+                             <option value="249.50">G-Receiver III ($249.50)
+                         </select>
+       
+                         <!-- QUANTITY OF ORDER -->
+                         <select name="qty" onchange="order_price()">
+                             <option value="0">Quantity</option>
+                             <option value="1">1</option>
+                             <option value="2">2</option>
+                             <option value="3">3</option>
+                             <option value="4">4</option>
+                             <option value="5">5</option>
+                             <option value="6">6</option>
+                             <option value="7">7</option>
+                             <option value="8">8</option>
+                             <option value="9">9</option>
+                             <option value="10">10</option>
+                         </select>
+                     </td>
+     
+                     <!-- PRICE OF SELECTED ITEM X QUANTITY ORDERED -->
+                     <td>
+                         <input class="numbers" name="sub1" size="7" value="0.00" disabled>
+                     </td>
+                  </tr>
+
+                  <tr>
+                     <!-- TAX APPLIED TO THE ORDER -->
+                     <td width="70" valign="top">
+                         <span class="fmlabel">Tax (5%):</span>
+                     </td>
+                     <td valign="top" colspan="2" align="right">
+                         <input class="numbers" name="sub2" size="7" value="0.00" disabled>
+                     </td>
+                  </tr>
+
+                  <tr>
+                     <!-- METHOD OF SHIPPING -->
+                     <td width="70" valign="top">
+                         <span class="fmlabel">Shipping:</span>
+                     </td>
+                     <td valign="top">
+                         <input type="radio" name="shipping" value="7.95" onclick="shipping_price(this)">
+                             Standard (3-5 days): $7.95<br>
+                         <input type="radio" name="shipping" value="9.95" onclick="shipping_price(this)">
+                             Express (2 days): $9.95<br>
+                         <input type="radio" name="shipping" value="12.95" onclick="shipping_price(this)">
+                             Next Day (1 day): $12.95
+                     </td>
+                     <td valign="top">
+                         <input class="numbers" name="sub3" size="7" value="0.00" disabled>
+                     </td>
+                  </tr>
+
+                  <tr>
+                     <!-- TOTAL COST OF ORDER (PRODUCT COST + TAX + SHIPPING) -->
+                     <td colspan="2" align="right">
+                         <span class="fmlabel"><b>TOTAL:</b></span>
+                     </td>
+                     <td>
+                         <input class="numbers" name="total" size="7" value="0.00" disabled>
+                     </td>
+                  </tr>
+                </table>
+         </td>
+      </tr>
+
+
+      <tr>
+         <!-- SHIPPING ADDRESS FIELDS -->
+         <td valign="top" colspan="2">
+             <fieldset>
+                <legend>Shipping Address</legend>
+                <table>
+                  <tr>
+                     <td>
+                         <span class="fmlabel">Name:</span>
+                     </td>
+                     <td>
+                         <input name="sname" size="40">
+                     </td>
+                  </tr>
+                  <tr>
+                     <td width="70" valign="top">
+                         <span class="fmlabel">Street:</span>
+                     </td>
+                     <td>
+                         <textarea rows="3" cols="40" name="sstreet"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td width="70" valign="top">
+                         <span class="fmlabel">City:</span>
+                     </td>
+                     <td>
+                         <input size="30" name="scity">
+                         <span class="fmlabel">State:</span>
+                         <select name="sstate">
+                             <option value=""></option>					   
+                             <option value="AL">AL</option>
+                             <option value="AR">AK</option>
+                             <option value="AZ">AZ</option>
+                             <option value="AR">AR</option>
+                             <option value="CA">CA</option>
+                             <option value="CO">CO</option>
+                             <option value="CT">CT</option>
+                             <option value="DE">DE</option>
+                             <option value="DC">DC</option>
+                             <option value="FL">FL</option>
+                             <option value="GA">GA</option>
+                             <option value="HI">HI</option>
+                             <option value="ID">ID</option>
+                             <option value="IL">IL</option>
+                             <option value="IN">IN</option>
+                             <option value="IA">IA</option>
+                             <option value="KS">KS</option>
+                             <option value="KY">KY</option>
+                             <option value="LA">LA</option>
+                             <option value="ME">ME</option>
+                             <option value="MD">MD</option>
+                             <option value="MA">MA</option>
+                             <option value="MI">MI</option>
+                             <option value="MN">MN</option>
+                             <option value="MS">MS</option>
+                             <option value="MO">MO</option>
+                         </select>
+                         <span class="fmlabel">ZIP:</span>
+                             <input size="10" name="szip">
+                     </td>
+                  </tr>
+                </table>
+             </fieldset>
+         </td>
+      </tr>
+
+      <tr>
+         <!-- BILLING ADDRESS FIELDS -->
+         <td valign="top" colspan="2">
+             <fieldset>
+                <legend>Billing Address</legend>
+                <table>
+                  <tr>
+                     <td colspan="2">
+                         <input type="checkbox" name="billcb" onclick="copy_shipping()">Same as Shipping Address
+                         <input type="checkbox" name="creditcb" onclick="use_credit()">Bill me now with my credit card.
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                         <span class="fmlabel">Name:</span>
+                     </td>
+                     <td>
+                         <input name="bname" size="40">
+                     </td>
+                  </tr>
+                  <tr>
+                     <td width="70" valign="top">
+                         <span class="fmlabel">Street:</span>
+                     </td>
+                     <td>
+                         <textarea rows="3" cols="40" name="bstreet">
+                         </textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td width="70" valign="top">
+                         <span class="fmlabel">City:</span>
+                     </td>
+                     <td>
+                         <input size="30" name="bcity">
+                         <span class="fmlabel">State:</span>
+                         <select name="bstate">
+                             <option value=""></option>					   
+                             <option value="AL">AL</option>
+                             <option value="AR">AK</option>
+                             <option value="AZ">AZ</option>
+                             <option value="AR">AR</option>
+                             <option value="CA">CA</option>
+                             <option value="CO">CO</option>
+                             <option value="CT">CT</option>
+                             <option value="DE">DE</option>
+                             <option value="DC">DC</option>
+                             <option value="FL">FL</option>
+                             <option value="GA">GA</option>
+                             <option value="HI">HI</option>
+                             <option value="ID">ID</option>
+                             <option value="IL">IL</option>
+                             <option value="IN">IN</option>
+                             <option value="IA">IA</option>
+                             <option value="KS">KS</option>
+                             <option value="KY">KY</option>
+                             <option value="LA">LA</option>
+                             <option value="ME">ME</option>
+                             <option value="MD">MD</option>
+                             <option value="MA">MA</option>
+                             <option value="MI">MI</option>
+                             <option value="MN">MN</option>
+                             <option value="MS">MS</option>
+                             <option value="MO">MO</option>
+                         </select>
+                         <span class="fmlabel">ZIP:</span>
+                         <input size="10" name="bzip">
+                     </td>
+                  </tr>
+                </table>
+             </fieldset>
+         </td>
+      </tr>
+
+      <tr>
+         <!-- CREDIT CARD FIELDS -->
+         <td valign="top" colspan="2">
+             <fieldset>
+                <legend>Credit Card Information</legend>
+                <table width="100%">
+                  <tr>
+                     <!-- NAME ON CARD -->
+                     <td width="70" valign="top">
+                         <span class="fmlabel">Name:</span>
+                     </td>
+                     <td colspan="3">
+                         <input size="40" name="cname">
+                     </td>
+                  </tr>
+                  <tr>
+                     <!-- CARD TYPE -->
+                     <td width="70" valign="top">
+                         <span class="fmlabel">Card:</span>
+                     </td>
+                     <td valign="top">
+                         <input type="radio" name="ccard" value="ae">American Express<br>
+                         <input type="radio" name="ccard" value="cc">CitiBank
+                     </td>
+                     <td valign="top">
+                         <input type="radio" name="ccard" value="dn">Diner's Club<br>
+                         <input type="radio" name="ccard" value="di">Discover
+                     </td>
+                     <td valign="top">
+                         <input type="radio" name="ccard" value="mc">MasterCard<br>
+                         <input type="radio" name="ccard" value="vi">Visa
+                     </td>
+                  </tr>
+                  <tr>
+                     <!-- CARD NUMBER -->
+                     <td width="70" valign="top">
+                         <span class="fmlabel">Number:</span>
+                     </td>
+
+                     <!-- CARD EXPIRATION DATE -->
+                     <td colspan="3">
+                         <input type="password" size="20" name="cnumber">
+                         <span class="fmlabel">Expiration:</span>
+                         <select name="expmonth">
+  					       <option value=""></option>
+                             <option value="01">01</option>
+                             <option value="02">02</option>
+                             <option value="03">03</option>
+                             <option value="04">04</option>
+                             <option value="05">05</option>
+                             <option value="06">06</option>
+                             <option value="07">07</option>
+                             <option value="08">08</option>
+                             <option value="09">09</option>
+                             <option value="10">10</option>
+                             <option value="11">11</option>
+                             <option value="12">12</option>
+                         </select>
+                         /
+                         <select name="expyear">
+  					       <option value=""></option>					   
+                             <option value="2013">2013</option>
+                             <option value="2014">2014</option>
+                             <option value="2015">2015</option>
+                             <option value="2016">2016</option>
+                             <option value="2017">2017</option>
+                             <option value="2018">2018</option>	   
+                         </select>
+                     </td>
+                  </tr>
+                </table>
+             </fieldset>
+         </td>
+      </tr>
+
+      <tr>
+         <!-- BUTTONS TO SUBMIT OR CANCEL THE ORDER -->
+         <td align="center" colspan="2">
+             <input type="submit" value="Submit Order">
+             &nbsp;&nbsp;
+             <input type="reset" value="Cancel Order">
+         </td>
+      </tr>
+      </form>
+    </table>
+  </body>
+</html>
