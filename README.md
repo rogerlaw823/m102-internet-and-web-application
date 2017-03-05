@@ -1,2 +1,6 @@
-# This is mark six homework in M102
-# Please go to https://rogerlaw823.github.io/mark_six_homework.html
+# M102 Homework
+# Please go to https://rogerlaw823.github.io/folder_name/file_new.html
+
+### Workshop01: https://rogerlaw823.github.io/M102-workshop01-Table/parkcity.html
+
+### Workshop02: https://rogerlaw823.github.io/M102-Workshop02-WebForm-support/reigster.htm
