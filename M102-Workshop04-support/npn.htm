@@ -1,0 +1,215 @@
+<html>
+  <head>
+    <title>North Pole Novelties</title>
+
+    <script language = "JavaScript">
+      // Hide from non-JavaScript browsers
+      function XmasDays(CurrentDay) 
+      {
+        var XYear = CurrentDay.getFullYear();
+        var XDay = new Date("December, 25, "+XYear);
+        XDay.setFullYear(XYear);
+        var DayCount = (XDay -CurrentDay) / (1000*60*60*24);
+        DayCount=Math.round(DayCount);
+        return DayCount;
+      }
+      // Stop hiding
+
+      function MonthTxt(MonthNumber)
+      {
+        var Month   = new Array();
+        Month[1]    = "January";
+        Month[2]    = "February";
+        Month[3]    = "March";
+        Month[4]    = "April";
+        Month[5]    = "May";
+        Month[6]    = "June";
+        Month[7]    = "July";
+        Month[8]    = "August";
+        Month[9]    = "September";
+        Month[10]   = "October";
+        Month[11]   = "November";
+        Month[12]   = "December";
+        return Month[MonthNumber];
+      }
+
+    </script>     
+
+    <style>
+        body                   { background-image       : url(wrap.jpg)
+                               }
+        p b                    { color                  : green
+                               }
+        h3                     { font-family            : Arial, Helvetica, sans-serif; 
+                                 color                  : red; 
+                                 margin-bottom          : -20px
+                               }
+        #npn                   { background-color       : white; 
+                                 width                  : 620; 
+                                 border                 : outset 7 red
+                               }
+        #contact               { font-family            : Arial, Helvetica, sans-serif; 
+                                 color                  : red;
+                                 font-size              : 8pt; 
+                                 text-align             : center; 
+                                 border-top             : solid 2 darkred
+                               }
+        #daycell               { vertical-align         : top; 
+                                 text-align             : center; 
+                                 background-color       : gold;
+                                 color                  : red; 
+                                 font-size              : 10pt; 
+                                 font-family            : Arial, Helvetica, sans-serif;
+                                 border-bottom          : solid 2 darkred
+                               }
+        #linkscell             { vertical-align         : top; 
+                                 background-color       : darkred; 
+                                 width                  : 140
+                               }
+        #linkscell h2          { color                  : white; 
+                                 font-family            : Arial, Helvetica, sans-serif; 
+                                 text-align             : center
+                               }
+        #linkscell a           { color                  : gold; 
+                                 text-decoration        : none; 
+                                 font-size              : 8pt; 
+                                 font-weight            : bold; 
+                                 font-family            : Arial, Helvetica, sans-serif
+                               }
+        #linkscell a:hover     { color                  : lightgreen;
+                                 text-decoration        : underline
+                               }
+    </style>
+
+  </head>
+
+  <body>
+    <center>
+       <table id="npn" cellpadding="5" cellspacing="0">
+
+         <tr>
+            <td id="linkscell" rowspan="4" bgcolor="darkred" valign="top">
+                <!--- Company Hyperlinks -->
+                <h2>Links</h2>
+                <a href="const.htm">Home Page</a><br>
+                <a href="const.htm">Shopping Cart</a><br>
+                <a href="const.htm">Your Account</a><br>
+                <a href="const.htm">Contact Us</a><br><br>
+
+                <a href="const.htm">Angels</a><br>
+                <a href="const.htm">Cards</a><br>
+                <a href="const.htm">Collectibles</a><br>
+                <a href="const.htm">Creches</a></br>
+                <a href="const.htm">Garland</a><br>
+                <a href="const.htm">Gift Wraps</a><br>
+                <a href="const.htm">Lights</a><br>
+                <a href="const.htm">Nutcrackers</a><br>
+                <a href="const.htm">Ornaments</a><br>
+                <a href="const.htm">Santas</a><br>
+                <a href="const.htm">Trains</a><br>
+                <a href="const.htm">Trees</a><br>
+                <a href="const.htm">Villages</a><br>
+                <a href="const.htm">Wreaths</a>
+            </td>
+
+            <td id="daycell">
+              <!--- Days until Christmas -->
+              <script language="JavaScript">
+                // Hide from non-JavaScript browsers Stop hiding
+                var Today     = new Date();
+                var ThisDay   = Today.getDate();
+                var ThisMonth = Today.getMonth()+1;
+                var ThisYear  = Today.getFullYear();
+                var DaysLeft  = XmasDays(Today);
+                var MonthName = MonthTxt(ThisMonth);
+
+                document.write("Today is "+ThisDay+" "+MonthName+" "+ThisYear+"<br>");
+                
+                if (DaysLeft > 0)
+                {
+                  document.write("Only "+DaysLeft+" days before Christmas");
+                }
+                else
+                {
+                  document.write("Happy Holidays from North Pole Novelies");
+                }
+              </script>
+            </td>
+         </tr>
+
+         <tr>
+            <td valign="top" width="500" align="center">
+                <!--- Company Logo -->
+                <img src="logo.jpg" alt="North Pole Novelties">
+            </td>
+         </tr>
+
+         <tr>
+            <!--- Articles about the company -->
+            <td>
+                <table border="0" cellspacing="4" cellpadding="4" width="500">
+                  <tr>
+                     <td valign="top" width="250">
+                         <!--- Welcome message -->
+                         <h3>Welcome!</h3>
+                         <p><img src="bells.jpg" align="left">
+                            Welcome to <b>North Pole Novelties</b>. 
+                            Consider us your complete 
+                            holiday store. Whether you're a collector or simply 
+                            looking for a beautiful piece to treasure for years, 
+                            you'll find it at NPN. Please click on one of the many 
+                            links to explore all we have to offer.
+                         </p>
+
+                         <!--- Latest news -->
+                         <h3>News Flash!</h3>
+                         <p>North Pole Novelties is proud to announce a new line of 
+                            <b>Lasseter Old Towne Village collectible houses</b>. 
+                            Start building your collection of these wonderful miniature 
+                            porcelain houses and shops.
+                         </p>
+                         <p>Each model has accessories to enhance the collection. 
+                            Be sure to order extra trees, fences, street lights and 
+                            signs to bring activity and a festive atmosphere to your 
+                            miniature town.
+                         </p>
+                     </td>
+
+
+                     <td valign="top" width="250">
+                         <!--- Information about the company -->
+                         <h3>Who Are We?</h3>
+                         <p><img src="watkins.jpg" align="right">
+                            Located in Seton Grove, Minnesota, North Pole Novelties 
+                            is one of the oldest and largest holiday stores 
+                            in the country. The store was founded in 1968 by 
+                            <b>David Watkins</b> (shown here). 
+                            Today, David, his family, and over 300 employees manage 
+                            the daily operation of making the holiday season last 
+                            all year.
+                         </p>
+                         <p>The store itself is the size of two football fields and 
+                            attracts visitors from around the world. If you can't pay 
+                            us a visit, order our catalogue. We will deliver to any 
+                            spot in the United States and overseas. In a rush? 
+                            We can deliver your order overnight! We also gift wrap.
+                         </p>
+                     </td>
+                  </tr>
+                </table>
+            </td>
+         </tr>
+
+         <tr>
+            <td id="contact">
+               <!--- Contact Information -->
+               <b>North Pole Novelties</b> | 
+               25 Oakdale Avenue | 
+               Seton Grove, MN 53112 | 
+               (404) 555-1225
+            </td>
+         </tr>
+       </table>
+    </center>
+  </body>
+</html>
